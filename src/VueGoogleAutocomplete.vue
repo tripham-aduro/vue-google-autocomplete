@@ -43,6 +43,10 @@
           enableGeolocation: {
             type: Boolean,
             default: false
+          },
+
+          item: {
+            type: Object
           }
         },
 
@@ -66,7 +70,7 @@
 
         watch: {
             autocompleteText: function (newVal, oldVal) {
-	            this.$emit('inputChange', { newVal, oldVal }, this.id);
+	            this.$emit('inputChange', { newVal, oldVal });
             }
         },
 
@@ -95,7 +99,7 @@
                 if (!place.geometry) {
                   // User entered the name of a Place that was not suggested and
                   // pressed the Enter key, or the Place Details request failed.
-                  this.$emit('no-results-found', place, this.id);
+                  this.$emit('no-results-found', place);
                   return;
                 }
 
@@ -132,6 +136,8 @@
                     this.onChange()
                 }
            });
+
+          this.autocompleteText = this.item && this.item.fullAddress || '';
         },
 
         methods: {
