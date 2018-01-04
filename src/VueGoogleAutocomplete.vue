@@ -5,7 +5,7 @@
     :class="classname"
     :id="id"
     :placeholder="placeholder"
-    v-model="autocompleteText"
+    :value="autocompleteText"
     @focus="onFocus()"
     @blur="onBlur()"
     @change="onChange"
@@ -141,20 +141,8 @@
           this.autocompleteText = document.getElementById(this.id).value;
           this.onChange();
         }
-
       });
-      this.autocompleteText = this.item && this.item.fullAddress || '';
     },
-
-//    created () {
-//      console.log('created item:', this.item);
-//      if (this.item.id === 0) {
-//        this.autocompleteText = ''
-//      } else {
-//        this.autocompleteText = this.item && this.item.fullAddress || '';
-//      }
-//      console.log('created:', this.autocompleteText);
-//    },
 
     methods: {
       /**
@@ -176,7 +164,7 @@
        * When the input got changed
        */
       onChange () {
-        this.$emit('change', this.autocompleteText);
+        this.$emit('change', document.getElementById(this.id).value);
       },
 
       /**
