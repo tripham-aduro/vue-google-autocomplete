@@ -100,6 +100,8 @@
 
       this.autocomplete.addListener('place_changed', () => {
 
+        this.$emit('startPlaceChanged');
+
         let place = this.autocomplete.getPlace();
 
         if (!place.geometry) {
