@@ -65,6 +65,8 @@
          * @type {String}
          */
 //        autocompleteText: '',
+
+        isInPlaceChanged: false
       }
     },
 
@@ -100,7 +102,7 @@
 
       this.autocomplete.addListener('place_changed', () => {
 
-        this.$emit('startPlaceChanged');
+        this.isInPlaceChanged = true;
 
         let place = this.autocomplete.getPlace();
 
@@ -108,6 +110,7 @@
           // User entered the name of a Place that was not suggested and
           // pressed the Enter key, or the Place Details request failed.
           this.$emit('no-results-found', place);
+          this.isInPlaceChanged = false;
           return;
         }
 
@@ -141,7 +144,9 @@
 
           // update autocompleteText then emit change event
           this.autocompleteText = document.getElementById(this.id).value;
-          this.onChange();
+
+          this.isInPlaceChanged = false;
+          // this.onChange();
         }
       });
     },
@@ -166,7 +171,11 @@
        * When the input got changed
        */
       onChange () {
-        this.$emit('change', document.getElementById(this.id).value);
+        setTimeout(() => {
+          if (!this.isInPlaceChanged) {
+            this.$emit('change', document.getElementById(this.id).value);
+          }
+        }, 300);
       },
 
       /**
