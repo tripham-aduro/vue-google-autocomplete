@@ -144,8 +144,6 @@
 
           // update autocompleteText then emit change event
           this.autocompleteText = document.getElementById(this.id).value;
-
-          this.isInPlaceChanged = false;
           // this.onChange();
         }
       });
@@ -173,9 +171,10 @@
       onChange () {
         setTimeout(() => {
           if (!this.isInPlaceChanged) {
-            this.$emit('change', document.getElementById(this.id).value);
+            this.$emit('change', this.autocompleteText);
           }
-        }, 300);
+          this.isInPlaceChanged = false;
+        }, 400);
       },
 
       /**
