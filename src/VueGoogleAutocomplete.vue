@@ -78,7 +78,7 @@
 
     computed: {
       autocompleteText() {
-        return this.item && this.item.fullAddress || '';
+        return this.id.indexOf('shipping_') >=0 ? this.item && this.item.shippingAddress : this.item && this.item.fullAddress || '';
       }
     },
 
