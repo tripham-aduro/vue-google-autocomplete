@@ -6,6 +6,7 @@
     :id="id"
     :placeholder="placeholder"
     :value="autocompleteText"
+    :disable="disable"
     @focus="onFocus()"
     @blur="onBlur()"
     @change="onChange"
@@ -47,6 +48,11 @@
 
       item: {
         type: Object
+      },
+
+      disable: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -83,6 +89,10 @@
     },
 
     mounted: function () {
+      if (this.disable) {
+        return;
+      }
+
       const options = {};
 
       if (this.types) {
