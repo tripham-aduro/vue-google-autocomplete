@@ -181,7 +181,7 @@
       onChange () {
         setTimeout(() => {
           if (!this.isInPlaceChanged) {
-            this.$emit('change', this.autocompleteText);
+            this.$emit('change', document.getElementById(this.id).value);
           }
           this.isInPlaceChanged = false;
         }, 400);
